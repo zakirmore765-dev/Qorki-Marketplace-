@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qorki-Marketplace</title>
+    <title>Qorki Marketplace - ዕቃ መሸጫ እና ክፍያ</title>
     <style>
         * {
             margin: 0;
@@ -19,104 +19,174 @@
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #1e1e1e;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid #2a2a2a;
-            margin-bottom: 25px;
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ff9800;
         }
 
-        .header-brand h2 {
-            font-size: 28px;
-            font-weight: bold;
-            color: #ffffff;
-            letter-spacing: 0.5px;
+        .form-group {
+            margin-bottom: 18px;
         }
 
-        .sell-link {
-            text-decoration: none;
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #ccc;
         }
 
-        .sell-btn {
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 6px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #ff9800;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
             background-color: #ff9800;
-            color: #000000;
-            border: none;
-            padding: 10px 22px;
-            font-size: 16px;
+            color: #000;
             font-weight: bold;
+            border: none;
             border-radius: 6px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            font-size: 16px;
+            transition: 0.3s;
+            margin-top: 10px;
         }
 
-        .sell-btn:hover {
+        button:hover {
             background-color: #e68a00;
         }
 
-        .search-container {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+        .divider {
+            height: 1px;
+            background-color: #333;
+            margin: 30px 0;
         }
 
-        .search-input, .filter-select {
-            background-color: #1e1e1e;
-            border: 1px solid #333;
-            color: #fff;
-            padding: 12px 15px;
+        #result-message {
+            margin-top: 15px;
+            padding: 10px;
             border-radius: 6px;
-            outline: none;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        .success {
+            background-color: #1b5e20;
+            color: #4caf50;
+        }
+
+        .error {
+            background-color: #b71c1c;
+            color: #ff8a80;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #ff9800;
+            text-decoration: none;
             font-size: 14px;
-        }
-
-        .search-input {
-            flex: 2;
-            min-width: 250px;
-        }
-
-        .filter-select {
-            flex: 1;
-            min-width: 150px;
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Header Section -->
-        <header>
-            <div class="header-brand">
-                <h2>Qorki-Marketplace</h2>
-            </div>
-            
-            <a href="project.html" class="sell-link">
-                <button class="sell-btn">+ ሽጥ (Sell)</button>
-            </a>
-        </header>
+        <a href="/" class="back-link">← ወደ ዋና ገጽ ተመለስ</a>
 
-        <!-- Search & Filter Section -->
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="ምን መግዛት ይፈልጋሉ...">
-            <select class="filter-select">
-                <option value="">ኤሌክትሮኒክስ</option>
-                <option value="phones">ስልኮች</option>
-                <option value="laptops">ላፕቶፖች</option>
-            </select>
-            <select class="filter-select">
-                <option value="">አዲስ አበባ</option>
-                <option value="nazret">አዳማ</option>
-                <option value="hawassa">ሐዋሳ</option>
-            </select>
+        <!-- Section 1: የእቃ መረጃ መሙያ (Sell Form) -->
+        <h2>1. የእቃ መረጃ ያስገቡ</h2>
+        <form id="sellForm">
+            <div class="form-group">
+                <label>የእቃው ስም</label>
+                <input type="text" id="itemName" placeholder="ለምሳሌ: Samsung Galaxy S21" required>
+            </div>
+            <div class="form-group">
+                <label>ዋጋ (በብር)</label>
+                <input type="number" id="itemPrice" placeholder="ለምሳሌ: 15000" required>
+            </div>
+            <div class="form-group">
+                <label>የእቃው ዝርዝር / መግለጫ</label>
+                <textarea id="itemDesc" rows="4" placeholder="የእቃውን ሁኔታ እና ዝርዝር መረጃ እዚህ ይጻፉ..."></textarea>
+            </div>
+        </form>
+
+        <div class="divider"></div>
+
+        <!-- Section 2: የቴሌብር ክፍያ ማረጋገጫ (Telebirr Payment Verification) -->
+        <h2>2. የቴሌብር ክፍያ ማረጋገጫ</h2>
+        <p style="font-size: 13px; color: #aaa; margin-bottom: 15px; text-align: center;">
+            ማስታወቂያ ለማውጣት እባክዎን የቴሌብር ክፍያ የፈጸሙበትን Transaction Number ያስገቡ።
+        </p>
+
+        <div class="form-group">
+            <label>Transaction Number (TxID)</label>
+            <input type="text" id="txNumber" placeholder="ለምሳሌ: Cl12345678" required>
         </div>
+
+        <button type="button" onclick="verifyPayment()">ክፍያን አረጋግጥ</button>
+
+        <div id="result-message"></div>
     </div>
+
+    <script>
+        async function verifyPayment() {
+            const txNumber = document.getElementById('txNumber').value.trim();
+            const messageBox = document.getElementById('result-message');
+
+            if (!txNumber) {
+                alert("እባክዎን የ Transaction ቁጥር ያስገቡ!");
+                return;
+            }
+
+            messageBox.style.display = 'block';
+            messageBox.className = '';
+            messageBox.innerText = 'ክፍያው እየተረጋገጠ ነው...';
+
+            try {
+                const response = await fetch('/api/verify-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ txNumber: txNumber })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    messageBox.className = 'success';
+                    messageBox.innerText = data.message;
+                } else {
+                    messageBox.className = 'error';
+                    messageBox.innerText = data.message;
+                }
+            } catch (err) {
+                messageBox.className = 'error';
+                messageBox.innerText = 'ከሰርቨር ጋር መገናኘት አልተቻለም!';
+            }
+        }
+    </script>
 
 </body>
 </html>
