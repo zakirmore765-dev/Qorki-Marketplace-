@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qorki Marketplace - ዕቃ መሸጫ እና ክፍያ</title>
+    <title>Qorki-Marketplace | እቃ መሸጫ</title>
     <style>
         * {
             margin: 0;
@@ -19,12 +19,12 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 650px;
             margin: 20px auto;
             background-color: #1e1e1e;
             padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
 
         .top-nav {
@@ -54,25 +54,12 @@
         }
 
         h2 {
-            text-align: center;
+            font-size: 20px;
             margin-bottom: 15px;
             color: #ff9800;
-        }
-
-        /* የክፍያ ዋጋ ማሳያ ሣጥን */
-        .price-box {
-            background-color: #2a2a2a;
-            border: 2px dashed #ff9800;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .price-box h3 {
-            color: #4caf50;
-            font-size: 22px;
-            margin-top: 5px;
+            border-bottom: 2px solid #ff9800;
+            display: inline-block;
+            padding-bottom: 5px;
         }
 
         .form-group {
@@ -84,9 +71,10 @@
             margin-bottom: 8px;
             font-size: 14px;
             color: #ccc;
+            font-weight: 500;
         }
 
-        input, textarea {
+        input, textarea, select {
             width: 100%;
             padding: 12px;
             background-color: #2a2a2a;
@@ -97,20 +85,35 @@
             font-size: 15px;
         }
 
-        input:focus, textarea:focus {
+        input:focus, textarea:focus, select:focus {
             border-color: #ff9800;
+        }
+
+        .price-box {
+            background-color: #2a2a2a;
+            border: 2px dashed #ff9800;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .price-box h3 {
+            color: #4caf50;
+            font-size: 24px;
+            margin-top: 5px;
         }
 
         .submit-btn {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background-color: #ff9800;
             color: #000;
             font-weight: bold;
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 17px;
             transition: 0.3s;
             margin-top: 10px;
         }
@@ -141,55 +144,98 @@
 <body>
 
     <div class="container">
-        <!-- Top Navigation with Home Button -->
+        <!-- Top Navigation -->
         <div class="top-nav">
             <a href="/" class="home-btn">🏠 ወደ ዋና ገጽ (Home)</a>
-            <span style="color: #aaa; font-size: 14px;">Qorki Marketplace</span>
+            <span style="color: #aaa; font-size: 14px; font-weight: bold;">Qorki-Marketplace</span>
         </div>
 
-        <!-- Section 1: የእቃ መረጃ መሙያ -->
+        <!-- Section 1: የእቃ መረጃ (JiJi Style Form) -->
         <h2>1. የእቃ መረጃ ያስገቡ</h2>
         <form id="sellForm">
             <div class="form-group">
-                <label>የእቃው ስም</label>
-                <input type="text" id="itemName" placeholder="ለምሳሌ: Samsung Galaxy S21" required>
+                <label>የእቃው ስም / ርዕስ *</label>
+                <input type="text" id="itemName" placeholder="ለምሳሌ: Samsung Galaxy S21 Ultra" required>
             </div>
+
             <div class="form-group">
-                <label>የእቃው ዋጋ (በብር)</label>
-                <input type="number" id="itemPrice" placeholder="ለምሳሌ: 15000" required>
+                <label>ምድብ (Category) *</label>
+                <select id="itemCategory" required>
+                    <option value="">ምድብ ይምረጡ</option>
+                    <option value="phones">ስልኮችና ታብሌቶች</option>
+                    <option value="laptops">ላፕቶፖችና ኮምፒውተሮች</option>
+                    <option value="electronics">ኤሌክትሮኒክስ</option>
+                    <option value="vehicles">መኪናዎችና ተሽከርካሪዎች</option>
+                    <option value="fashion">ልብሶችና ጫማዎች</option>
+                </select>
             </div>
+
+            <div class="form-group">
+                <label>ከተማ / ቦታ *</label>
+                <select id="itemLocation" required>
+                    <option value="">ቦታ ይምረጡ</option>
+                    <option value="addis_ababa">አዲስ አበባ</option>
+                    <option value="adama">አዳማ</option>
+                    <option value="hawassa">ሐዋሳ</option>
+                    <option value="bahir_dar">ባሕር ዳር</option>
+                    <option value="diredawa">ድሬዳዋ</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>የእቃው ዋጋ (በብር) *</label>
+                <input type="number" id="itemPrice" placeholder="ለምሳሌ: 25000" required>
+            </div>
+
+            <div class="form-group">
+                <label>የሻጭ ስልክ ቁጥር *</label>
+                <input type="tel" id="sellerPhone" placeholder="09........" required>
+            </div>
+
+            <div class="form-group">
+                <label>የእቃው ፎቶ ያስገቡ</label>
+                <input type="file" id="itemImage" accept="image/*">
+            </div>
+
             <div class="form-group">
                 <label>የእቃው መግለጫ / ዝርዝር</label>
-                <textarea id="itemDesc" rows="3" placeholder="የእቃውን ሁኔታ እና ዝርዝር መረጃ ይፃፉ..."></textarea>
+                <textarea id="itemDesc" rows="4" placeholder="የእቃውን ሁኔታ (አዲስ/ያገለገለ)፣ ጥራት እና ተጨማሪ መረጃዎችን ያብራሩ..."></textarea>
             </div>
         </form>
 
         <div class="divider"></div>
 
-        <!-- Section 2: የክፍያ መረጃ እና ማረጋገጫ -->
+        <!-- Section 2: የማስታወቂያ ክፍያ (Telebirr Verification) -->
         <h2>2. የማስታወቂያ ክፍያ</h2>
         
-        <!-- የስንት ብር ክፍያ እንደሆነ የሚያሳየው ቦታ -->
         <div class="price-box">
             <p style="color: #aaa; font-size: 14px;">የማስታወቂያ አገልግሎት ክፍያ</p>
             <h3>5.00 ETB (ብር)</h3>
-            <p style="font-size: 12px; color: #888; margin-top: 5px;">ይህንን ክፍያ በ ቴሌብር (Telebirr) ይክፈሉ</p>
+            <p style="font-size: 12px; color: #888; margin-top: 5px;">በ ቴሌብር ክፍያውን ፈጽመው Transaction Number ያስገቡ</p>
         </div>
 
         <div class="form-group">
-            <label>Transaction Number (TxID)</label>
-            <input type="text" id="txNumber" placeholder="የቴሌብር SMS ላይ የመጣውን Transaction ID ያስገቡ" required>
+            <label>Transaction Number (TxID) *</label>
+            <input type="text" id="txNumber" placeholder="ከ ቴሌብር SMS የደረሰዎትን Transaction ID ያስገቡ" required>
         </div>
 
-        <button type="button" class="submit-btn" onclick="verifyPayment()">ክፍያን አረጋግጥ እና ለጥፍ</button>
+        <button type="button" class="submit-btn" onclick="verifyPayment()">ማስታወቂያውን ለጥፍ (Post Ad)</button>
 
         <div id="result-message"></div>
     </div>
 
     <script>
         async function verifyPayment() {
+            const itemName = document.getElementById('itemName').value.trim();
+            const itemPrice = document.getElementById('itemPrice').value.trim();
+            const sellerPhone = document.getElementById('sellerPhone').value.trim();
             const txNumber = document.getElementById('txNumber').value.trim();
             const messageBox = document.getElementById('result-message');
+
+            if (!itemName || !itemPrice || !sellerPhone) {
+                alert("እባክዎን ሁሉንም አስፈላጊ የእቃ መረጃዎች ይሙሉ!");
+                return;
+            }
 
             if (!txNumber) {
                 alert("እባክዎን የ Transaction ቁጥር ያስገቡ!");
@@ -211,7 +257,7 @@
 
                 if (data.success) {
                     messageBox.className = 'success';
-                    messageBox.innerText = data.message;
+                    messageBox.innerText = "ለጥፈዋል! " + data.message;
                 } else {
                     messageBox.className = 'error';
                     messageBox.innerText = data.message;
