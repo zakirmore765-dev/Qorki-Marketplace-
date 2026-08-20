@@ -54,9 +54,14 @@ app.post('/api/verify-payment', (req, res) => {
     }
 });
 
-// 3. Home Route (ቀጥታ ለመጀመሪያ ጊዜ first.html እንዲከፈት)
+// 3. Home Route (መጀመሪያ የሚከፈተው first.html እንዲሆን)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'first.html'));
+    res.sendFile(path.join(__dirname, 'first.html'), (err) => {
+        if (err) {
+            // first.html ካልተገኘ index.html ን ይከፍታል
+            res.sendFile(path.join(__dirname, 'index.html'));
+        }
+    });
 });
 
 // 4. Project Page Route (የመሸጫ ገጽ)
