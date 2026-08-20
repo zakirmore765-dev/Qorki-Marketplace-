@@ -89,6 +89,15 @@
             border-color: #ff9800;
         }
 
+        .image-preview {
+            margin-top: 10px;
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 6px;
+            display: none;
+            border: 1px solid #444;
+        }
+
         .price-box {
             background-color: #2a2a2a;
             border: 2px dashed #ff9800;
@@ -150,7 +159,7 @@
             <span style="color: #aaa; font-size: 14px; font-weight: bold;">Qorki-Marketplace</span>
         </div>
 
-        <!-- Section 1: የእቃ መረጃ (JiJi Style Form) -->
+        <!-- Section 1: የእቃ መረጃ -->
         <h2>1. የእቃ መረጃ ያስገቡ</h2>
         <form id="sellForm">
             <div class="form-group">
@@ -192,9 +201,11 @@
                 <input type="tel" id="sellerPhone" placeholder="09........" required>
             </div>
 
+            <!-- የፎቶ ማስገቢያ እና Preview ማሳያ -->
             <div class="form-group">
-                <label>የእቃው ፎቶ ያስገቡ</label>
-                <input type="file" id="itemImage" accept="image/*">
+                <label>የእቃው ፎቶ ያስገቡ (Photo) *</label>
+                <input type="file" id="itemImage" accept="image/*" onchange="previewImage(event)">
+                <img id="imgPreview" class="image-preview" alt="የተመረጠው ፎቶ ቅድመ-እይታ">
             </div>
 
             <div class="form-group">
@@ -205,7 +216,7 @@
 
         <div class="divider"></div>
 
-        <!-- Section 2: የማስታወቂያ ክፍያ (Telebirr Verification) -->
+        <!-- Section 2: የማስታወቂያ ክፍያ -->
         <h2>2. የማስታወቂያ ክፍያ</h2>
         
         <div class="price-box">
@@ -225,6 +236,19 @@
     </div>
 
     <script>
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('imgPreview');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
         async function verifyPayment() {
             const itemName = document.getElementById('itemName').value.trim();
             const itemPrice = document.getElementById('itemPrice').value.trim();
@@ -257,7 +281,7 @@
 
                 if (data.success) {
                     messageBox.className = 'success';
-                    messageBox.innerText = "ለጥፈዋል! " + data.message;
+                    messageBox.innerText = data.message;
                 } else {
                     messageBox.className = 'error';
                     messageBox.innerText = data.message;
