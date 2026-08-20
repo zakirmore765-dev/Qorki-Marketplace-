@@ -5,10 +5,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Telebirr Transactions Store
 let telebirrTransactions = [];
 
+// Static ፋይሎችን ለማንበብ (HTML, CSS, Images, JS)
 app.use(express.static(__dirname));
 
+// 1. Webhook Endpoint for Telebirr SMS
 app.post('/webhook', (req, res) => {
     const { message, sender } = req.body;
 
@@ -34,6 +37,7 @@ app.post('/webhook', (req, res) => {
     res.status(400).json({ status: "failed", message: "Invalid Telebirr SMS" });
 });
 
+// 2. Verify Payment API
 app.post('/api/verify-payment', (req, res) => {
     const { txNumber } = req.body;
 
@@ -41,7 +45,7 @@ app.post('/api/verify-payment', (req, res) => {
 
     if (foundTx) {
         if (foundTx.amount >= 5) {
-            return res.json({ success: true, message: "ክፍያው በትክክል ተረጋግጧል!" });
+            return res.json({ success: true, message: "ክፍያው በትክክል ተረጋግጧል! ማስታወቂያዎ ተለጥፏል።" });
         } else {
             return res.json({ success: false, message: "የተከፈለው ገንዘብ ከ 5 ብር ያነሰ ነው!" });
         }
@@ -50,10 +54,17 @@ app.post('/api/verify-payment', (req, res) => {
     }
 });
 
+// 3. Home Route (ቀጥታ ለመጀመሪያ ጊዜ first.html እንዲከፈት)
 app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'first.html'));
+});
+
+// 4. Project Page Route (የመሸጫ ገጽ)
+app.get('/project.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'project.html'));
 });
 
+// Port Setting
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
